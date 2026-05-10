@@ -1,279 +1,296 @@
 process.env.TZ = 'Asia/Jakarta'
 
-const fs = require('fs')
-const path = require('path')
 const axios = require('axios')
+const sharp = require('sharp')
 const moment = require('moment-timezone')
-const levelling = require('../../lib/levelling')
 
 let arrayMenu = [
-  'all','ai','main','downloader','database',
-  'rpg','rpgG','sticker','advanced','xp',
-  'fun','game','github','group','image',
-  'nsfw','info','internet','islam','kerang',
-  'maker','news','owner','voice','quotes',
-  'store','stalk','shortlink','tools','anonymous',''
+  'all',
+  'ai',
+  'main',
+  'downloader',
+  'database',
+  'rpg',
+  'rpgG',
+  'sticker',
+  'advanced',
+  'xp',
+  'fun',
+  'game',
+  'github',
+  'group',
+  'image',
+  'nsfw',
+  'info',
+  'internet',
+  'islam',
+  'kerang',
+  'maker',
+  'news',
+  'owner',
+  'voice',
+  'quotes',
+  'store',
+  'stalk',
+  'shortlink',
+  'tools',
+  'anonymous'
 ]
 
 const allTags = {
-  'all':        'SEMUA MENU',
-  'ai':         'AI',
-  'main':       'UTAMA',
-  'downloader': 'DOWNLOADER',
-  'database':   'DATABASE',
-  'rpg':        'RPG',
-  'rpgG':       'RPG GUILD',
-  'sticker':    'STICKER',
-  'advanced':   'ADVANCED',
-  'xp':         'XP & LEVEL',
-  'fun':        'FUN',
-  'game':       'GAME',
-  'github':     'GITHUB',
-  'group':      'GROUP',
-  'image':      'IMAGE',
-  'nsfw':       'NSFW',
-  'info':       'INFO',
-  'internet':   'INTERNET',
-  'islam':      'ISLAM',
-  'kerang':     'KERANG AJAIB',
-  'maker':      'MAKER',
-  'news':       'NEWS',
-  'owner':      'OWNER',
-  'voice':      'VOICE',
-  'quotes':     'QUOTES',
-  'store':      'STORE',
-  'stalk':      'STALK',
-  'shortlink':  'SHORTLINK',
-  'tools':      'TOOLS',
-  'anonymous':  'ANONYMOUS',
-  '':           'LAINNYA'
+  all: 'SEMUA MENU',
+  ai: 'AI',
+  main: 'UTAMA',
+  downloader: 'DOWNLOADER',
+  database: 'DATABASE',
+  rpg: 'RPG',
+  rpgG: 'RPG GUILD',
+  sticker: 'STICKER',
+  advanced: 'ADVANCED',
+  xp: 'XP & LEVEL',
+  fun: 'FUN',
+  game: 'GAME',
+  github: 'GITHUB',
+  group: 'GROUP',
+  image: 'IMAGE',
+  nsfw: 'NSFW',
+  info: 'INFO',
+  internet: 'INTERNET',
+  islam: 'ISLAM',
+  kerang: 'KERANG AJAIB',
+  maker: 'MAKER',
+  news: 'NEWS',
+  owner: 'OWNER',
+  voice: 'VOICE',
+  quotes: 'QUOTES',
+  store: 'STORE',
+  stalk: 'STALK',
+  shortlink: 'SHORTLINK',
+  tools: 'TOOLS',
+  anonymous: 'ANONYMOUS'
 }
 
-const THUMB = 'https://a.top4top.io/p_37802zcmd1.png'
+const THUMB_URL = 'https://a.top4top.io/p_37802zcmd1.png'
 const SOURCE = global.gc || 'https://whatsapp.com'
 
-async function getBuffer(url) {
-  const res = await axios.get(url, {
-    responseType: 'arraybuffer'
-  })
-  return res.data
+let cachedThumb = null
+
+async function getThumbnail() {
+  if (cachedThumb) return cachedThumb
+
+  try {
+    const res = await axios.get(THUMB_URL, {
+      responseType: 'arraybuffer',
+      timeout: 10000
+    })
+
+    cachedThumb = await sharp(Buffer.from(res.data))
+      .resize(500, 300, { fit: 'cover' })
+      .jpeg({ quality: 85 })
+      .toBuffer()
+
+  } catch (e) {
+    cachedThumb = null
+  }
+
+  return cachedThumb
 }
 
-let handler = async (m, { conn, usedPrefix: _p, args = [] }) => {
+let handler = async (m, { conn, usedPrefix, args }) => {
   try {
+    let user = global.db.data.users[m.sender] || {}
 
-    let user = global.db.data.users[m.sender]
+    let level = user.level || 0
+    let limit = user.limit || 0
+    let name = m.pushName || 'User'
 
-    let exp = user.exp
-    let limit = user.limit
-    let level = user.level
+    let input = (args[0] || '').toLowerCase()
 
-    let name = m.pushName || `@${m.sender.split('@')[0]}`
-    let teks = (args[0] || '').toLowerCase()
+    let now = moment().tz('Asia/Jakarta')
+    let tanggal = now.format('DD/MM/YYYY')
+    let jam = now.format('HH:mm:ss')
 
-    let d = moment().tz('Asia/Jakarta')
-
-    let date = d.format('DD MMMM YYYY')
-    let time = d.format('HH:mm:ss [WIB]')
     let uptime = clockString(process.uptime() * 1000)
 
-    let thumb = await getBuffer(THUMB)
+    let thumb = await getThumbnail()
 
-    let help = Object.values(global.plugins)
-      .filter(plugin => !plugin.disabled)
-      .map(plugin => ({
-        help: Array.isArray(plugin.help)
-          ? plugin.help
-          : [plugin.help],
-        tags: Array.isArray(plugin.tags)
-          ? plugin.tags
-          : [plugin.tags],
-        prefix: 'customPrefix' in plugin,
-        limit: plugin.limit,
-        premium: plugin.premium
-      }))
+    let plugins = Object.values(global.plugins)
+      .filter(v => v.help && !v.disabled)
+      .map(v => {
+        return {
+          help: Array.isArray(v.help) ? v.help : [v.help],
+          tags: Array.isArray(v.tags) ? v.tags : [v.tags],
+          premium: v.premium,
+          limit: v.limit,
+          customPrefix: v.customPrefix
+        }
+      })
 
-    // ================= MENU UTAMA =================
+    // =========================
+    // MENU UTAMA
+    // =========================
+    if (!input) {
 
-    if (!teks) {
+      let categoryText = ''
 
-      let cats = arrayMenu.filter(
-        t => t && allTags[t] && t !== 'all'
-      )
+      for (let tag of arrayMenu) {
+        if (tag === 'all') continue
 
-      let rows = []
-
-      for (let i = 0; i < cats.length; i += 3) {
-
-        let row = cats
-          .slice(i, i + 3)
-          .map(t => `• ${_p}menu ${t}`)
-          .join('\n')
-
-        rows.push(row)
+        categoryText += `│◦ ${usedPrefix}menu ${tag}\n`
       }
 
-      let menuList = `
-*VYNAAMD BOT WHATSAPP*
-
-Halo, *${name}*
-
-╭─❏ INFO USER
-│ • Level : ${level}
-│ • Limit : ${limit}
-│ • Exp   : ${exp}
-╰──────────
-
-╭─❏ BOT INFO
-│ • Prefix  : ${_p}
-│ • Runtime : ${uptime}
-│ • Date    : ${date}
-│ • Time    : ${time}
-╰──────────
-
-*DAFTAR MENU*
-
-${rows.join('\n\n')}
-
-• ${_p}menu all
-
-_Ketik ${_p}menu kategori_
-_untuk melihat detail menu._
-
-© VynaaMD By VynaaValerie
+      let text = `
+╭━━━〔 VYNAAMD 〕━━━⬣
+│
+│◦ Halo ${name}
+│◦ Prefix : ${usedPrefix}
+│◦ Level : ${level}
+│◦ Limit : ${limit}
+│
+│◦ Date : ${tanggal}
+│◦ Time : ${jam} WIB
+│◦ Runtime : ${uptime}
+│
+├─〔 LIST MENU 〕
+${categoryText}│
+├─〔 INFO 〕
+│◦ Ketik ${usedPrefix}menu all
+│◦ Untuk melihat semua menu
+│
+╰━━━〔 VYNAA VALERIE 〕━━⬣
 `.trim()
 
-      await conn.sendMessage(m.chat, {
-        text: menuList,
+      let externalAdReply = {
+        title: 'VYNAA MD WHATSAPP BOT',
+        body: `Runtime ${uptime}`,
+        mediaType: 1,
+        renderLargerThumbnail: true,
+        sourceUrl: SOURCE,
+        previewType: 'PHOTO'
+      }
+
+      if (thumb) externalAdReply.thumbnail = thumb
+
+      return conn.sendMessage(m.chat, {
+        text,
         contextInfo: {
           mentionedJid: [m.sender],
-          externalAdReply: {
-            title: 'VYNAAMD BOT',
-            body: `Prefix ${_p} • Level ${level}`,
-            mediaType: 1,
-            renderLargerThumbnail: true,
-            thumbnail: thumb,
-            sourceUrl: SOURCE,
-            previewType: 'PHOTO'
-          }
+          externalAdReply
         }
       }, { quoted: m })
-
-      return
     }
 
-    // ================= MENU TIDAK ADA =================
+    // =========================
+    // MENU TIDAK ADA
+    // =========================
+    if (!allTags[input]) {
+      return m.reply(`
+Menu *${input}* tidak ditemukan.
 
-    if (!allTags[teks]) {
-      return m.reply(
-`Menu *"${teks}"* tidak ditemukan.
-
-Ketik *${_p}menu* untuk melihat daftar menu.`
-      )
+Ketik:
+${usedPrefix}menu
+`.trim())
     }
 
-    // ================= RENDER CATEGORY =================
-
+    // =========================
+    // RENDER CATEGORY
+    // =========================
     const renderCategory = (tag) => {
 
-      let cmds = help.filter(menu =>
-        menu.tags &&
-        menu.tags.includes(tag) &&
-        menu.help
-      )
+      let cmds = plugins.filter(v => v.tags.includes(tag))
 
-      let lines = []
+      let txt = `
+╭━━━〔 ${allTags[tag]} 〕━━━⬣
+│
+`.trim()
 
-      for (let menu of cmds) {
+      if (cmds.length < 1) {
+        txt += `\n│◦ Tidak ada menu`
+      }
 
-        for (let h of menu.help) {
+      for (let cmd of cmds) {
 
-          let cmd = menu.prefix
-            ? h
-            : _p + h
+        for (let h of cmd.help) {
 
-          let flags =
-            (menu.limit ? ' ⓛ' : '') +
-            (menu.premium ? ' 🅟' : '')
+          let isPremium = cmd.premium ? ' Ⓟ' : ''
+          let isLimit = cmd.limit ? ' Ⓛ' : ''
 
-          lines.push(`│ • ${cmd}${flags}`)
+          txt += `\n│◦ ${cmd.customPrefix ? '' : usedPrefix}${h}${isLimit}${isPremium}`
         }
       }
 
-      return `
-╭─❏ ${allTags[tag]}
-${lines.join('\n') || '│ • -'}
-╰──────────
-`.trim()
+      txt += `\n│\n╰━━━━━━━━━━━━⬣\n`
+
+      return txt
     }
 
-    // ================= MENU CATEGORY =================
-
-    let menuCategory = `
-*VYNAAMD BOT*
-
-Halo, *${name}*
-
-📅 ${date}
-🕒 ${time}
+    // =========================
+    // MENU ALL
+    // =========================
+    let result = `
+╭━━━〔 VYNAAMD MENU 〕━━━⬣
+│
+│◦ User : ${name}
+│◦ Level : ${level}
+│◦ Limit : ${limit}
+│◦ Time : ${jam} WIB
+│
+╰━━━━━━━━━━━━⬣
 
 `.trim()
 
-    if (teks === 'all') {
+    if (input === 'all') {
 
       for (let tag of arrayMenu) {
 
-        if (tag !== 'all' && allTags[tag]) {
-          menuCategory += '\n\n' + renderCategory(tag)
-        }
+        if (tag === 'all') continue
+
+        result += '\n\n' + renderCategory(tag)
       }
 
     } else {
 
-      menuCategory += '\n\n' + renderCategory(teks)
+      result += '\n\n' + renderCategory(input)
     }
 
-    menuCategory += `
+    result += `
+> Ⓛ = memakai limit
+> Ⓟ = premium only
+`.trim()
 
-ⓛ = LIMIT
-🅟 = PREMIUM
+    let externalAdReply2 = {
+      title: `MENU ${allTags[input]}`,
+      body: `VynaaMD WhatsApp Bot`,
+      mediaType: 1,
+      renderLargerThumbnail: true,
+      sourceUrl: SOURCE,
+      previewType: 'PHOTO'
+    }
 
-© VynaaMD By VynaaValerie
-`
+    if (thumb) externalAdReply2.thumbnail = thumb
 
     await conn.sendMessage(m.chat, {
-      text: menuCategory,
+      text: result,
       contextInfo: {
         mentionedJid: [m.sender],
-        externalAdReply: {
-          title: `MENU ${allTags[teks]}`,
-          body: `VynaaMD • ${_p}menu`,
-          mediaType: 1,
-          renderLargerThumbnail: true,
-          thumbnail: thumb,
-          sourceUrl: SOURCE,
-          previewType: 'PHOTO'
-        }
+        externalAdReply: externalAdReply2
       }
     }, { quoted: m })
 
   } catch (e) {
-
     console.log(e)
 
-    m.reply('Menu error, coba lagi.')
+    m.reply('Menu error.')
   }
 }
 
 handler.help = ['menu', 'help']
 handler.tags = ['main']
 handler.command = /^(menu|help)$/i
-handler.exp = 3
 
 module.exports = handler
 
 function clockString(ms) {
-
   if (isNaN(ms)) return '--'
 
   let h = Math.floor(ms / 3600000)
