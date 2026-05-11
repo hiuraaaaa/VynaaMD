@@ -70,7 +70,7 @@ const allTags = {
   anonymous: 'ANONYMOUS'
 }
 
-const THUMB_URL = 'https://a.top4top.io/p_37802zcmd1.png'
+const THUMB_URL = 'https://d.uguu.se/QyctVeJW.jpg'
 const SOURCE = global.gc || 'https://whatsapp.com'
 
 let cachedThumb = null
@@ -140,7 +140,7 @@ let handler = async (m, { conn, usedPrefix, args }) => {
       }
 
       let text = `
-╭━━━〔 VYNAAMD 〕━━━⬣
+╭━━━〔 LUMINA 〕━━━⬣
 │
 │◦ Halo ${name}
 │◦ Prefix : ${usedPrefix}
@@ -157,11 +157,11 @@ ${categoryText}│
 │◦ Ketik ${usedPrefix}menu all
 │◦ Untuk melihat semua menu
 │
-╰━━━〔 VYNAA VALERIE 〕━━⬣
+╰━━━〔 XEN444 〕━━⬣
 `.trim()
 
       let externalAdReply = {
-        title: 'VYNAA MD WHATSAPP BOT',
+        title: 'LUMINA WHATSAPP BOT',
         body: `Runtime ${uptime}`,
         mediaType: 1,
         renderLargerThumbnail: true,
@@ -228,7 +228,7 @@ ${usedPrefix}menu
     // MENU ALL
     // =========================
     let result = `
-╭━━━〔 VYNAAMD MENU 〕━━━⬣
+╭━━━〔 LUMINA MENU 〕━━━⬣
 │
 │◦ User : ${name}
 │◦ Level : ${level}
@@ -260,7 +260,7 @@ ${usedPrefix}menu
 
     let externalAdReply2 = {
       title: `MENU ${allTags[input]}`,
-      body: `VynaaMD WhatsApp Bot`,
+      body: `Lumina WhatsApp Bot`,
       mediaType: 1,
       renderLargerThumbnail: true,
       sourceUrl: SOURCE,
