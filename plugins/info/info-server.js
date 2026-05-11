@@ -30,7 +30,7 @@ let handler = async (m, { conn }) => {
             mediaType: 1,
             previewType: 0,
             renderLargerThumbnail: true,
-            thumbnailUrl: 'https://a.top4top.io/p_37802zcmd1.png',
+            thumbnailUrl: 'https://d.uguu.se/QyctVeJW.jpg',
             sourceUrl: ''
           }
         },
