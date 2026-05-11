@@ -22,7 +22,7 @@ global.spam = false; // Set true/false untuk anti spam (default: false)
 global.gcspam = false; // Set true/false untuk menutup grup ketika spam (default: false)
 
 // APIKEY INI WAJIB DI ISI! //
-global.vtech = "apikeymu";
+global.vtech = "sk-6bdb7d175063";
 // global.vtech = process.env.API_KEY_VTECH;
 // aktifkan akses .env di atas jika kamu ingin menaruh key api di .env
 // Daftar terlebih dahulu https://api.vtech.biz.id
