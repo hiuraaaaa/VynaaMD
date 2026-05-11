@@ -1,28 +1,28 @@
 let handler = async (m, { conn }) => {
-  let text = `🌸 *Tim & Kredit VynaaMD*
+  let text = `✨ *Tim & Kredit Lumina*
 
 ╭─────────────────────
 │ 🙏 *Terima kasih kepada:*
 │─────────────────────
 │ ☝️ Allah SWT — atas segalanya
-│ 👑 VynaaValerie — Developer
+│ 👑 Xen444 — Developer
 │ 🔧 WhiskeySockets — Library Baileys
-│ 💎 Semua pengguna VynaaMD
+│ 💎 Semua pengguna Lumina
 ╰─────────────────────
 
-> _© VynaaMD by VynaaValerie_`
+> _© Lumina by Xen4_`
 
   conn.relayMessage(m.chat, {
     extendedTextMessage: {
       text,
       contextInfo: {
         externalAdReply: {
-          title: '🌸 VynaaMD — Tim & Kredit',
-          body: 'by VynaaValerie',
+          title: '✨ Lumina — Tim & Kredit',
+          body: 'by Xen4',
           mediaType: 1,
           previewType: 0,
           renderLargerThumbnail: true,
-          thumbnailUrl: 'https://a.top4top.io/p_37802zcmd1.png',
+          thumbnailUrl: 'https://d.uguu.se/QyctVeJW.jpg',
           sourceUrl: global.gc || 'https://whatsapp.com'
         }
       }
