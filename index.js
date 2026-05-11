@@ -10,7 +10,7 @@ const app = express();
 
 require('./config');
 
-const bot_ku = 'VynaaMD';
+const bot_ku = 'Lumina';
 
 function figletAsync(text, opts) {
   return new Promise((resolve, reject) => {
@@ -22,7 +22,7 @@ function figletAsync(text, opts) {
 }
 
 async function tampilkanHeader() {
-  const nameown = global.nameowner || 'VTech';
+  const nameown = global.nameowner || 'CI iO';
   const judulAscii = await figletAsync(bot_ku, {
     font: 'Standard',
     horizontalLayout: 'default',
@@ -33,9 +33,9 @@ async function tampilkanHeader() {
 
   console.clear();
   console.log(chalk.hex('#FFD700')(judulAscii));
-  console.log(chalk.magenta.bold(`\n   ${bot_ku} — WhatsApp Bot by VynaaValerie 🌸`));
+  console.log(chalk.magenta.bold(`\n   ${bot_ku} — WhatsApp Bot by Xena ✨`));
   console.log(chalk.gray(`   ${'-'.repeat(45)}`));
-  console.log(chalk.white(`   Owner: ${chalk.bold(nameown)} | © VynaaMD | V1.0.0`));
+  console.log(chalk.white(`   Owner: ${chalk.bold(nameown)} | © Lumina | V1.0.0`));
   console.log(chalk.gray(`   ${'-'.repeat(45)}\n`));
 }
 
@@ -60,9 +60,9 @@ async function startServer() {
     res.setHeader('Content-Type', 'application/json');
     const data = {
       status: 'online',
-      bot: 'VynaaMD',
-      message: '🌸 VynaaMD Bot Aktif!',
-      author: 'VynaaValerie',
+      bot: 'Lumina',
+      message: '✨ Lumina Bot Aktif!',
+      author: 'Xena',
       version: '1.0.0'
     };
     res.send(JSON.stringify({ response: data }, null, 2));
