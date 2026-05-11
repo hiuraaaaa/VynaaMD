@@ -5,7 +5,7 @@ let handler = async (m, { conn }) => {
     conn.relayMessage(m.chat, {
         extendedTextMessage: {
             text: `╭━━━━━━━━━━━━━━━━━━━━━╮
-┃  🌸 *V y n a a M D* 🌸
+┃  ✨ *L u m i n a* ✨
 ╰━━━━━━━━━━━━━━━━━━━━━╯
 
 ╭─────────────────────
@@ -15,15 +15,15 @@ let handler = async (m, { conn }) => {
 │ ✨ Total Fitur   : ${totalf}
 ╰─────────────────────
 
-> _© VynaaMD by VynaaValerie_`,
+> _© Lumina by Xen4_`,
             contextInfo: {
                 externalAdReply: {
-                    title: '🌸 VynaaMD — Total Fitur',
+                    title: '✨ Lumina — Total Fitur',
                     body: `${totalf} fitur aktif`,
                     mediaType: 1,
                     previewType: 0,
                     renderLargerThumbnail: true,
-                    thumbnailUrl: 'https://a.top4top.io/p_37802zcmd1.png',
+                    thumbnailUrl: 'https://d.uguu.se/QyctVeJW.jpg',
                     sourceUrl: global.gc || 'https://whatsapp.com'
                 }
             }
