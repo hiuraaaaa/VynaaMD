@@ -1,19 +1,19 @@
 require("dotenv").config();
 
-global.owner = ["6282389924037"]; // wajib di isi tidak boleh kosong
-global.mods = ["6282389924037"]; // wajib di isi tidak boleh kosong
-global.prems = ["6282389924037"]; // wajib di isi tidak boleh kosong
-global.nameowner = "VynaaValerie"; // wajib di isi tidak boleh kosong
-global.numberowner = "6282389924037"; // wajib di isi tidak boleh kosong
+global.owner = ["62882006639544"]; // wajib di isi tidak boleh kosong
+global.mods = ["62882006639544"]; // wajib di isi tidak boleh kosong
+global.prems = ["62882006639544"]; // wajib di isi tidak boleh kosong
+global.nameowner = "Xena"; // wajib di isi tidak boleh kosong
+global.numberowner = "62882006639544"; // wajib di isi tidak boleh kosong
 global.mail = "support@vtech.biz.id"; // wajib di isi tidak boleh kosong
-global.gc = "https://chat.whatsapp.com/IweqL2NAVve5ZKcoagMizs"; // wajib di isi tidak boleh kosong
-global.instagram = "https://instagram.com/VynaaValerie"; // wajib di isi tidak boleh kosong
-global.wm = "© VynaaMD by VynaaValerie"; // isi nama bot atau nama kalian
+global.gc = "https://chat.whatsapp.com/IweqL2NAVve5ZKcoagMizns"; // wajib di isi tidak boleh kosong
+global.instagram = "https://instagram.com/yvone"; // wajib di isi tidak boleh kosong
+global.wm = "© Lumina by Xena"; // isi nama bot atau nama kalian
 global.wait = "⏳ _*Tunggu sebentar, sedang diproses...*_"; // ini pesan simulasi loading
 global.eror = "❌ _*Terjadi kesalahan, coba lagi nanti!*_"; // ini pesan saat terjadi kesalahan
-global.stiker_wait = "🌸 *Stiker sedang dibuat, tunggu ya...*"; // ini pesan simulasi saat loading pembuatan sticker
-global.packname = "🌸 VynaaMD"; // watermark stikcker packname
-global.author = "VynaaValerie"; // watermark stikcker author
+global.stiker_wait = "✨ *Stiker sedang dibuat, tunggu ya...*"; // ini pesan simulasi saat loading pembuatan sticker
+global.packname = "✨ Lumina"; // watermark stikcker packname
+global.author = "Xena"; // watermark stikcker author
 global.maxwarn = "5"; // Peringatan maksimum Warn
 
 global.autobio = false; // Set true/false untuk mengaktifkan atau mematikan autobio (default: false)
