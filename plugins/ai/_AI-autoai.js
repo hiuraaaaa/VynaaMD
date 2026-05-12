@@ -21,48 +21,39 @@ handler.before = async (m, { conn }) => {
     if (!conn.sessionAI[m.sender]) return;
     if ([".", "#", "!", "/", "\\"].some(prefix => m.text.startsWith(prefix))) return;
 
-    if (conn.sessionAI[m.sender] && m.text) {    
+    if (conn.sessionAI[m.sender] && m.text) {
         const previousMessages = conn.sessionAI[m.sender].sessionChat || [];
-/**
- * @description Ubah prompt ini sesuai dengan keinginanmu.
- * @note Usahakan memberikan logika yang masuk akal dan mudah dipahami!
- */
-        const messages = [
-            { role: "system", content: "kamu adalah VynaaBot, Seorang Asisten pribadi yang di buat oleh VynaaValerie yang siap membantu kapan pun!" },
-            { role: "assistant", content: `Saya VynaaBot, asisten pribadi yang siap membantu kamu kapan pun! Apa yang bisa saya bantu hari ini?` },
-            ...previousMessages.map((msg, i) => ({ role: i % 2 === 0 ? 'user' : 'assistant', content: msg })),
-            { role: "user", content: m.text }
-        ];
+
+        const historyContext = previousMessages.length > 0
+            ? previousMessages.map((msg, i) => 
+                i % 2 === 0 ? `User: ${msg}` : `Lumina: ${msg}`
+              ).join('\n') + '\nUser: ' + m.text
+            : m.text;
 
         try {
-            const chat = async function(message) {
-                return new Promise(async (resolve, reject) => {
-                    try {
-                        const params = {
-                            message: message,
-                            apikey: vtech
-                        };
-                        const { data } = await axios.post('https://api.vtech.biz.id/api/search/openai-custom-v2', params);
-                        resolve(data);
-                    } catch (error) {
-                        reject(error);
-                    }
-                });
-            };
+            const { data } = await axios.get('https://api.siputzx.my.id/api/ai/gptoss120b', {
+                params: {
+                    prompt: historyContext,
+                    system: "Kamu adalah Lumina, asisten pribadi yang dibuat oleh Xena, siap membantu kapan pun!",
+                    temperature: 0.7
+                }
+            });
 
-            let res = await chat(messages);
-            if (res && res.result) {
-                await m.reply(res.result);
+            const result = data?.data?.response;
+
+            if (result) {
+                await m.reply(result);
                 conn.sessionAI[m.sender].sessionChat = [
                     ...conn.sessionAI[m.sender].sessionChat,
                     m.text,
-                    res.result
+                    result
                 ];
             } else {
                 m.reply("Kesalahan dalam mengambil data");
             }
         } catch (e) {
-            throw eror
+            console.error(e?.response?.data || e.message);
+            m.reply("Terjadi kesalahan saat menghubungi API.");
         }
     }
 };
@@ -70,6 +61,6 @@ handler.before = async (m, { conn }) => {
 handler.command = ['autoai'];
 handler.tags = ['ai'];
 handler.help = ['autoai'].map(a => a + ' *enable/disable*');
-handler.limit = true
+handler.limit = true;
 
 module.exports = handler;
