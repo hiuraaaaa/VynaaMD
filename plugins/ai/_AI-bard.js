@@ -14,7 +14,7 @@ try {
   throw eror
 }
 }
-handler.command = handler.help = ['bard','bardai','gemini'];
+handler.command = handler.help = ['bard','bardai'];
 handler.tags = ['ai'];
 handler.premium = false
 handler.limit = true;
