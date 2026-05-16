@@ -1,7 +1,7 @@
 {
-    "name": "vynaamd",
+    "name": "lumina",
     "version": "1.0.0",
-    "description": "VynaaMD - WhatsApp Bot by VynaaValerie",
+    "description": "Lumina - WhatsApp Bot by Xena",
     "depecrated": false,
     "main": "index.js",
     "directories": {
@@ -28,7 +28,7 @@
     ],
     "homepage": "https://api.vtech.biz.id",
     "author": {
-        "name": "VynaaValerie"
+        "name": "Xena"
     },
     "repository": {
         "type": "git",
