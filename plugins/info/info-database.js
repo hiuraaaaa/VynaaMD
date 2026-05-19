@@ -6,7 +6,7 @@ let handler = async (m) => {
     let totalGroups = Object.keys(global.db.data.chats).filter(c => c.endsWith('@g.us')).length
 
     m.reply(`╭━━━━━━━━━━━━━━━━━━━━━╮
-┃  🌸 *V y n a a M D* 🌸
+┃  ✨ *L u m i n a* ✨
 ╰━━━━━━━━━━━━━━━━━━━━━╯
 
 ╭─────────────────────
@@ -19,7 +19,7 @@ let handler = async (m) => {
 │ 👥 Total Grup   : ${totalGroups}
 ╰─────────────────────
 
-> _© VynaaMD by VynaaValerie_`)
+> _© Lumina by Xena_`)
 }
 
 handler.help = ['database', 'user']
