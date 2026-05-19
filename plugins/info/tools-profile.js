@@ -30,7 +30,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
   let user = global.db.data.users[who]
   let { name, limit, exp, money, lastclaim, premiumDate, premium, registered, regTime, age, level, pasangan } = user
 
-  let pp = 'https://a.top4top.io/p_37802zcmd1.png'
+  let pp = 'https://c.termai.cc/i154/R43UHM1.jpg'
   try { pp = await conn.profilePictureUrl(who, 'image') } catch (e) {}
 
   let about = ''
@@ -51,15 +51,15 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
     [150, 'Sergeant IV 🌟'], [160, 'Sergeant V 🌟'], [200, 'Staff ⭐'], [250, 'Sgt. Major 💫'],
     [300, '2nd Lt. 🔥'], [350, '1st Lt. 🔥'], [400, 'Major 💥'], [450, 'Colonel 👑'],
     [500, 'Brigadier 💎'], [600, 'Legendary 🏆'], [800, 'Super Legendary 🏆'],
-    [1000, 'Ultra Legendary 🏆'], [Infinity, 'Master Legendary 🌸']
+    [1000, 'Ultra Legendary 🏆'], [Infinity, 'Master Legendary ✨']
   ]
-  let role = roleList.find(([lvl]) => level <= lvl)?.[1] || 'Master Legendary 🌸'
+  let role = roleList.find(([lvl]) => level <= lvl)?.[1] || 'Master Legendary ✨'
 
   let { min, xp, max } = levelling.xpRange(level, global.multiplier)
   let sn = createHash('md5').update(who).digest('hex')
 
   let str = `╭━━━━━━━━━━━━━━━━━━━━━╮
-┃  🌸 *V y n a a M D* 🌸
+┃  ✨ *L u m i n a* ✨
 ╰━━━━━━━━━━━━━━━━━━━━━╯
 
 ╭─「 👤 *PROFIL* 」
@@ -88,7 +88,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
 │ 🕐 Klaim    : ${lastclaim > 0 ? new Date(lastclaim).toLocaleString('id-ID') : '-'}
 ╰──────────────────────
 
-> _© VynaaMD by VynaaValerie_`.trim()
+> _© Lumina by Xena_`.trim()
 
   let mentionedJid = [who]
   if (pasangan) mentionedJid.push(pasangan)
