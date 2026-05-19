@@ -6,7 +6,7 @@ let handler = async (m, { conn }) => {
     let fitur = Object.entries(db.data.stats).length
 
     let tio = `╭━━━━━━━━━━━━━━━━━━━━━╮
-┃  🌸 *V y n a a M D* 🌸
+┃  ✨ *L u m i n a* ✨
 ╰━━━━━━━━━━━━━━━━━━━━━╯
 
 ╭─────────────────────
@@ -20,19 +20,19 @@ let handler = async (m, { conn }) => {
 ╰─────────────────────
 
 > _Jika bot tidak merespon, kemungkinan sedang maintenance._
-> _© VynaaMD by VynaaValerie_`.trim()
+> _© Lumina by Xena_`.trim()
 
     conn.relayMessage(m.chat, {
         extendedTextMessage: {
             text: tio,
             contextInfo: {
                 externalAdReply: {
-                    title: '🌸 VynaaMD — Status Bot',
+                    title: '✨ Lumina — Status Bot',
                     body: `Uptime: ${uptimex}`,
                     mediaType: 1,
                     previewType: 0,
                     renderLargerThumbnail: true,
-                    thumbnailUrl: 'https://a.top4top.io/p_37802zcmd1.png',
+                    thumbnailUrl: 'https://c.termai.cc/i154/R43UHM1.jpg',
                     sourceUrl: global.gc || 'https://whatsapp.com'
                 }
             },
