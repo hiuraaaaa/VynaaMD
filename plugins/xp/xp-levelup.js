@@ -9,7 +9,7 @@ let handler = m => {
   let before = user.level * 1
   while (levelling.canLevelUp(user.level, user.exp, global.multiplier)) user.level++
   if (before !== user.level) {
-    m.reply(`🎉 *Level Up!*\n\n📈 ${before} ➜ *${user.level}*\n\n> Ketik *.profile* untuk melihat profil kamu!\n> _© VynaaMD_`.trim())
+    m.reply(`🎉 *Level Up!*\n\n📈 ${before} ➜ *${user.level}*\n\n> Ketik *.profile* untuk melihat profil kamu!\n> _© Lumina_`.trim())
   }
 }
 
