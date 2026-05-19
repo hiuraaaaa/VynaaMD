@@ -29,7 +29,7 @@ let handler = async function (m, { text, usedPrefix }) {
 ╰─────────────────────
 
 > _Simpan Serial Number kamu!_
-> _© VynaaMD by VynaaValerie_`.trim())
+> _© Lumina by Xena_`.trim())
 }
 
 handler.help = ['daftar', 'reg', 'register'].map(v => v + ' <nama>.<umur>')
