@@ -70,7 +70,7 @@ const allTags = {
   anonymous: 'ANONYMOUS'
 }
 
-const THUMB_URL = 'https://d.uguu.se/QyctVeJW.jpg'
+const THUMB_URL = 'https://c.termai.cc/i154/R43UHM1.jpg'
 const SOURCE = global.gc || 'https://whatsapp.com'
 
 let cachedThumb = null
