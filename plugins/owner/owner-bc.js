@@ -15,12 +15,12 @@ let handler = async (m, { conn, text }) => {
           text: text.trim(),
           contextInfo: {
             externalAdReply: {
-              title: '📢 ' + (global.wm || '© VynaaMD'),
-              body: 'Pesan dari Owner VynaaMD',
+              title: '📢 ' + (global.wm || '© Lumina'),
+              body: 'Pesan dari Owner Xena',
               mediaType: 1,
               previewType: 0,
               renderLargerThumbnail: true,
-              thumbnailUrl: 'https://a.top4top.io/p_37802zcmd1.png',
+              thumbnailUrl: 'https://c.termai.cc/i154/R43UHM1.jpg',
               sourceUrl: global.gc || 'https://whatsapp.com'
             }
           },
