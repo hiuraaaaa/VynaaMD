@@ -135,29 +135,27 @@ let handler = async (m, { conn, usedPrefix, args }) => {
 
       for (let tag of arrayMenu) {
         if (tag === 'all') continue
-
-        categoryText += `│◦ ${usedPrefix}menu ${tag}\n`
+        categoryText += `❑ ${usedPrefix}menu ${tag}\n`
       }
 
       let text = `
-╭━━━〔 LUMINA 〕━━━⬣
-│
-│◦ Halo ${name}
-│◦ Prefix : ${usedPrefix}
-│◦ Level : ${level}
-│◦ Limit : ${limit}
-│
-│◦ Date : ${tanggal}
-│◦ Time : ${jam} WIB
-│◦ Runtime : ${uptime}
-│
-├─〔 LIST MENU 〕
-${categoryText}│
-├─〔 INFO 〕
-│◦ Ketik ${usedPrefix}menu all
-│◦ Untuk melihat semua menu
-│
-╰━━━〔 XEN444 〕━━⬣
+𝙒𝙚𝙡𝗰𝗼𝗺𝗲 𝘁𝗼 Lumina
+
+❑ ᴜsᴇʀɴᴀᴍᴇ : ${name}
+❑ ᴅᴇᴠᴇʟᴏᴘᴇʀ : Xena
+❑ ᴏᴡɴᴇʀ : Xena
+❑ ᴘʀᴇғɪx : ${usedPrefix}
+❑ ʟᴇᴠᴇʟ : ${level}
+❑ ʟɪᴍɪᴛ : ${limit}
+❑ ᴠᴇʀsɪᴏɴ : 1.0.0
+
+➥ ᴅᴀᴛᴇ : ${tanggal}
+➥ ᴛɪᴍᴇ : ${jam} WIB
+➥ ʀᴜɴᴛɪᴍᴇ : ${uptime}
+
+ᴘʟᴇᴀsᴇ sᴇʟᴇᴄᴛ ᴛʜᴇ ᴍᴇɴᴜ ʙᴇʟᴏᴡ.
+${categoryText}
+© Lumina
 `.trim()
 
       let externalAdReply = {
@@ -200,26 +198,22 @@ ${usedPrefix}menu
       let cmds = plugins.filter(v => v.tags.includes(tag))
 
       let txt = `
-╭━━━〔 ${allTags[tag]} 〕━━━⬣
-│
+❑ *${allTags[tag]}*
 `.trim()
 
       if (cmds.length < 1) {
-        txt += `\n│◦ Tidak ada menu`
+        txt += `\n❑ Tidak ada menu`
       }
 
       for (let cmd of cmds) {
-
         for (let h of cmd.help) {
-
           let isPremium = cmd.premium ? ' Ⓟ' : ''
           let isLimit = cmd.limit ? ' Ⓛ' : ''
-
-          txt += `\n│◦ ${cmd.customPrefix ? '' : usedPrefix}${h}${isLimit}${isPremium}`
+          txt += `\n❑ ${cmd.customPrefix ? '' : usedPrefix}${h}${isLimit}${isPremium}`
         }
       }
 
-      txt += `\n│\n╰━━━━━━━━━━━━⬣\n`
+      txt += `\n`
 
       return txt
     }
@@ -228,28 +222,22 @@ ${usedPrefix}menu
     // MENU ALL
     // =========================
     let result = `
-╭━━━〔 LUMINA MENU 〕━━━⬣
-│
-│◦ User : ${name}
-│◦ Level : ${level}
-│◦ Limit : ${limit}
-│◦ Time : ${jam} WIB
-│
-╰━━━━━━━━━━━━⬣
+𝙒𝙚𝙡𝗰𝗼𝗺𝗲 𝘁𝗼 Lumina
 
+❑ ᴜsᴇʀɴᴀᴍᴇ : ${name}
+❑ ʟᴇᴠᴇʟ : ${level}
+❑ ʟɪᴍɪᴛ : ${limit}
+➥ ᴛɪᴍᴇ : ${jam} WIB
+
+© Lumina
 `.trim()
 
     if (input === 'all') {
-
       for (let tag of arrayMenu) {
-
         if (tag === 'all') continue
-
         result += '\n\n' + renderCategory(tag)
       }
-
     } else {
-
       result += '\n\n' + renderCategory(input)
     }
 
@@ -279,7 +267,6 @@ ${usedPrefix}menu
 
   } catch (e) {
     console.log(e)
-
     m.reply('Menu error.')
   }
 }
