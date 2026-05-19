@@ -108,9 +108,9 @@ let handler = async (m, { conn, usedPrefix, owner }) => {
                         contextInfo: {
                             externalAdReply: {
                                 mediaType: 1,
-                                title: 'VynaaMD RPG',
+                                title: 'Lumina RPG',
                                 title: wm,
-                                thumbnailUrl: 'https://a.top4top.io/p_37802zcmd1.png',
+                                thumbnailUrl: 'https://c.termai.cc/i154/R43UHM1.jpg',
                                 renderLargerThumbnail: true,
                                 sourceUrl: ''
                             }
