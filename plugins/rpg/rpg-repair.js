@@ -140,8 +140,8 @@ _Example_ :
                         contextInfo: {
                             externalAdReply: {
                                 mediaType: 1,
-                                title: 'VynaaMD RPG',
-                                thumbnailUrl: 'https://a.top4top.io/p_37802zcmd1.png',
+                                title: 'Lumina RPG',
+                                thumbnailUrl: 'https://c.termai.cc/i154/R43UHM1.jpg',
                                 renderLargerThumbnail: true,
                                 sourceUrl: ''
                             }
