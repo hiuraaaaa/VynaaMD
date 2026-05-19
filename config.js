@@ -18,9 +18,9 @@ global.gc          = "https://chat.whatsapp.com/IweqL2NAVve5ZKcoagMizns";
 global.instagram   = "https://instagram.com/yvone";
 
 // ===== PESAN SISTEM =====
-global.wait        = "⏳ _*Tunggu sebentar, sedang diproses...*_";
-global.eror        = "❌ _*Terjadi kesalahan, coba lagi nanti!*_";
-global.stiker_wait = "✨ *Stiker sedang dibuat, tunggu ya...*";
+global.wait        = "🌙 _*Sedang memproses permintaanmu, sabar ya~*_";
+global.eror        = "💫 _*Ups! Ada yang error, coba lagi nanti ya~*_";
+global.stiker_wait = "✨ _*Stiker lagi dibuat, tunggu sebentar ya~*_";
 
 // ===== PENGATURAN BOT =====
 global.maxwarn     = "5";
